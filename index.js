@@ -1,10 +1,5 @@
-## js-algorithm
-continuously update common JavaScript algorithms
 
-## 1. Add thousan separator to number 
-```
-# 12300 transform 12,300
-
+// 12300 transform 12,300
 function thousandSeparator(number) {
   let result = [];
   let rest = String(Math.abs(number));
@@ -16,4 +11,3 @@ function thousandSeparator(number) {
   return number < 0 ? "-" + r : r
 }
 console.log(666, thousandSeparator(12300))
-```
