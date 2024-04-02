@@ -3,11 +3,17 @@
 function thousandSeparator(number) {
   let result = [];
   let rest = String(Math.abs(number));
+  console.log(111, rest)
   while (rest.length) {
     result.push(rest.slice(-3));
+    console.log(222, result)
     rest = rest.slice(0, -3);
+    console.log(333, rest)
   }
   const r = result.reverse().join(",");
-  return number < 0 ? "-" + r : r
+  console.log(555, r)
+  const tempRes = number < 0 ? "-" + r : r
+  console.log(666, tempRes)
+  return tempRes
 }
-console.log(666, thousandSeparator(12300))
+thousandSeparator(12300)
