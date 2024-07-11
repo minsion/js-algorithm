@@ -2,28 +2,27 @@
 // 12300 transform 12,300
 function thousandSeparator(number) {
   let result = [];
-  let rest = String(Math.abs(number));
+  let rest = String(number);
   while (rest.length) {
-    result.push(rest.slice(-3));
+    result.unshift(rest.slice(-3));
     rest = rest.slice(0, -3);
   }
-  const r = result.reverse().join(",");
-  const tempRes = number < 0 ? "-" + r : r
-  console.log('thousandSeparator：', tempRes)
+  const tempRes = result.join(",");
   return tempRes
 }
-thousandSeparator(12300)
+console.log('thousandSeparator：', thousandSeparator(12378900))
+
 
 Array.prototype.myReduce = function (callback, initialValue) {
   let arr = this;
-  let pre = initialValue == undefined ? arr[0] : initialValue
-  let i = initialValue == undefined ? 1 : 0;
+  let pre = initialValue ? initialValue : arr[0];
+  let i = initialValue ? 0 : 1;
   for (i; i < arr.length; i++) {
-    pre = callback(pre, arr[i], i, arr);
+    pre = callback(pre, arr[i]);
   }
   return pre;
 }
-const res = [1, 2, 3, 4, 4].myReduce((pre, cur, index) => {
+const res = [1, 2, 3, 4].myReduce((pre, cur) => {
   return pre + cur;
 }, 1);
 console.log('myReduce', res);
