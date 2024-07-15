@@ -1,5 +1,5 @@
 
-//1. 12300 transform 12,300
+//1.Define a function to convert 12378900 to 12,378,900
 function thousandSeparator(number) {
   let result = [];
   let rest = String(number);
@@ -10,7 +10,7 @@ function thousandSeparator(number) {
   const tempRes = result.join(",");
   return tempRes
 }
-console.log('thousandSeparator：', thousandSeparator(12378900))
+console.log('thousandSeparator：', thousandSeparator(12378900)) // 12,378,900
 
 // 2.myReduce
 Array.prototype.myReduce = function (callback, initialValue) {
@@ -217,3 +217,136 @@ const myAdd = (min, max) => {
 }
 
 console.log('myAdd', myAdd(1, 100))
+
+function intersect(nums1, nums2) {
+  let i = j = 0,
+      len1 = nums1.length,
+      len2 = nums2.length,
+      newArr = [];
+  if (len1 === 0 || len2 === 0) {
+      return newArr;
+  }
+  nums1.sort(function (a, b) {
+      return a - b;
+  });
+  nums2.sort(function (a, b) {
+      return a - b;
+  });
+  while (i < len1 || j < len2) {
+      if (nums1[i] > nums2[j]) {
+          j++;
+      } else if (nums1[i] < nums2[j]) {
+          i++;
+      } else {
+          if (nums1[i] === nums2[j]) {
+              newArr.push(nums1[i]);
+          }
+          if (i < len1 - 1) {
+              i++;
+          } else {
+              break;
+          }
+          if (j < len2 - 1) {
+              j++;
+          } else {
+              break;
+          }
+      }
+  }
+  return newArr;
+};
+
+const set_intersection = (set1, set2) => {
+  if (set1.size > set2.size) {
+    return set_intersection(set2, set1);
+  }
+  const intersection = new Set();
+  for (const num of set1) {
+    if (set2.has(num)) {
+      intersection.add(num);
+    }
+  }
+  return [...intersection];
+}
+
+var intersection = function(nums1, nums2) {
+  const set1 = new Set(nums1);
+  const set2 = new Set(nums2);
+  return set_intersection(set1, set2);
+};
+
+// 测试
+console.log('intersect',intersect([3, 5, 8, 1], [2, 3]));
+console.log('intersection',intersection([2, 3], [3, 5, 8, 1]));
+
+const unique = (arr) => {
+  const result = {};
+  for (let i = 0; i < arr.length; i++) {
+    if(!result[arr[i]]){
+      result[arr[i]] = arr[i]
+    }
+  }
+  return Object.values(result)
+}
+console.log('unique', unique([1, '2', 3, 4, 3, '2']))
+
+// foo(typeof a)
+// function foo(p) {
+// 	console.log(this);
+// 	console.log(p);
+// 	console.log(typeof b);
+// 	let b = 0;
+// }
+
+class Foo {
+	constructor(arr) { 
+		this.arr = arr; 
+	}
+	bar(n) {
+		return this.arr.slice(0, n);
+	}
+}
+var f = new Foo([0, 1, 2, 3]);
+console.log(f.bar(1)); // [1]
+console.log(f.bar(2).splice(1, 1)); //[0, 1]
+console.log(f.arr); // [0, 1, 2, 3]
+
+// function f(count) {
+// 	console.log(`foo${count}`);
+// 	setTimeout(() => { console.log(`bar${count}`); });
+// }
+// f(1);
+// f(2);
+// setTimeout(() => { f(3); });
+// // foo1 foo2 bar1 bar2 foo3 bar3
+
+// 基类
+var Person = function (name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.test = "this is a test";
+Person.prototype.testFunc = function () {
+  console.log('this is a testFunc');
+}
+
+// 子类
+var Student = function (name, age, gender, score) {
+  Person.apply(this, [name, age]); // 盗用构造函数
+  this.gender = gender;
+  this.score = score;
+}
+Student.prototype = new Person(); // 改变 Student 构造函数的原型对象
+Student.prototype.testStuFunc = function () {
+  console.log('this is a testStuFunc');
+}
+
+// 测试
+var zhangsan = new Student("张三", 18, "男", 100);
+console.log(zhangsan.name); // 张三
+console.log(zhangsan.age); // 18
+console.log(zhangsan.gender); // 男
+console.log(zhangsan.score); // 100
+console.log(zhangsan.test); // this is a test
+zhangsan.testFunc(); // this is a testFunc
+zhangsan.testStuFunc(); // this is a testStuFunc
