@@ -1,8 +1,9 @@
 ## js-algorithm
-continuously update common JavaScript algorithms
+持续更新常见JavaScript算法
 
-### 1.Define a function to convert 12378900 to 12,378,900
-```
+### 1.定义一个函数，将 12378900 转换为 12,378,900
+
+```js
 # 12300 transform 12,300
 
 function thousandSeparator(number) {
@@ -47,62 +48,62 @@ console.log(a, b, a.__proto__ === Person.prototype)
 ### 4. call, apply, bind
 ```js
 function P(age, country) {
-console.log(`Hello, my name is ${this.name} and I am ${age}, I am from ${country}`);
+  console.log(`Hello, my name is ${this.name} and I am ${age}, I am from ${country}`);
 }
 /*
 
-1. The call function allows you to call a function in a specific context
+1. call 函数允许你在特定上下文中调用函数
 function.call(context, arg1, arg2, ...)
 
-2. The apply function is similar to the call function, and it also allows you to call a function in a specific context. The difference is that the apply function requires parameters to be passed as an array
+2. apply 函数与 call 函数类似，也允许你在特定上下文中调用函数。不同之处在于 apply 函数需要以数组形式传递参数
 function.apply(context, [argsArray])
 
-1. The bind function is different from the call and apply functions. It does not call the function immediately. Instead, it returns a new function that will be bound to the specified context,
-and when the function is called, it will run with the specified context.
+1. bind 函数与 call 和 apply 函数不同。它不会立即调用函数。而是返回一个将绑定到指定上下文的新函数，
+当调用该函数时，它将以指定的上下文运行。
 function.bind(thisArg, arg1, arg2, ...)
 */
 P.call({name: 'mary'}, '12', 'USA')
 P.apply({name: 'lilei'}, ['13', 'France'])
 P.bind({name: 'tom'}, '11', 'China')
 
-// 5. Custom call, apply, bind
-// Implement the call method
+// 5. 自定义call、apply、bind
+// 实现call方法
 Function.prototype.myCall = function (context, ...args) {
-  // If the context parameter is empty, it defaults to the window object
+  // 如果context参数为空，则默认为window对象
   context = context || window;
-  // Create a unique identifier using the Symbol function
+  // 使用Symbol函数创建唯一标识符
   const fnSymbol = Symbol();
-  // Store the original function as a property of the context object
+  // 将原始函数存储为context对象的属性
   context[fnSymbol] = this;
-  // Call the function and store the result in the result variable
+  // 调用函数并将结果存储在 result 变量中
   const result = context[fnSymbol](...args);
-  // Delete the properties of the context object
+  // 删除 context 对象的属性
   delete context[fnSymbol];
-  // Return the result of the function
+  // 返回函数的结果
   return result;
 };
 
-// Implement the apply method
+// 实现 apply 方法
 Function.prototype.myApply = function (context, args) {
-  // If the context parameter is empty, it defaults to the window object
+  // 如果 context 参数为空，则默认为 window 对象
   context = context || window;
-  // Create a unique identifier using the Symbol function
+  // 使用 Symbol 函数创建唯一标识符
   const fnSymbol = Symbol();
-  // Store the original function as a property of the context object
+  // 将原始函数存储为 context 对象的属性
   context[fnSymbol] = this;
-  // Call the function and store the result in the result variable
+  // 调用函数并将结果存储在 result 变量中
   const result = context[fnSymbol](...args);
-  // Delete the properties of the context object
+  // 删除 context 对象的属性
   delete context[fnSymbol];
-  // Return the result of the function
+  // 返回函数的结果
   return result;
 };
 
-// Implement the bind method
+// 实现 bind 方法
 Function.prototype.myBind = function (context, ...args) {
-  // Bind this Stored in fn variable
+  // 将 this 绑定到 fn 变量中
   const fn = this;
-  // Return a new function that merges the passed arguments with the new function's arguments and calls the original function with apply in the new context
+  // 返回一个新函数，该函数将传递的参数与新函数的参数合并，并在新上下文中使用 apply 调用原始函数
   return function (...newArgs) {
   return fn.apply(context, [...args, ...newArgs]);
   };
@@ -160,7 +161,7 @@ counter() // 11
 counter() // 12
 ```
 
-### 8.Sleep Function Write an asynchronous function that takes a positive integer parameter millis and sleeps for millis milliseconds. This function is required to be able to interpret any value.
+### 8.休眠函数编写一个异步函数，该函数接受正整数参数 millis 并休眠 millis 毫秒。此函数需要能够解释任何值。
 ```js
 /**
  * @param {number} millis
@@ -201,7 +202,7 @@ Array.prototype.myFlat = function(deep) {
 console.log('myFlat', [1,2,3,[4,5,6],[7,8,[9,10,11],12],[13,14,15]].myFlat(2))
 
 ```
-### 10.add and sub methods
+### 10.add and sub 方法
 ```js
 Number.prototype.add = function(n) {
   return this + n
@@ -213,7 +214,7 @@ Number.prototype.sub = function(n) {
 console.log('(5).add(3).sub(2)',(5).add(3).sub(2)) // 6
 ```
 
-### 11.sum method
+### 11.sum 方法
 ```js
 const myAdd = (min, max) => {
   let sum = 0
@@ -225,7 +226,7 @@ const myAdd = (min, max) => {
 
 console.log('myAdd', myAdd(1, 100))
 ```
-### 12.intersect
+### 12.继承
 ```js
 // 在西雅图的公司远程工作，因为月中算法考核，半月的绩效奖金没了。。。
 const intersect = function (nums1, nums2) {
@@ -246,7 +247,7 @@ intersect([1,2,1,2], [2,2,2]) // [2, 2, 2]
 intersect([4,9,5], [9,4,9,8,4]) // [4, 9]
 intersect([3,1,2], [2,2]) // [2]
 ```
-### 13.sortArray
+### 13.数组排序
 ```js
 /**
  * @param {number[]} nums
@@ -265,12 +266,12 @@ const sortArray = function (nums) {
 };
 sortArray([1, 3, 9, 5, 2, 4, 6])
 ```
-### 13.curry
+### 13.柯里化
 ```js
 /* 
-In this case, the curry function accepts a function fn as a parameter and returns a new function curried.
-When the curried function is called, it checks whether the number of parameters passed in is greater than or equal to the number of parameters (arity) of the original function fn.
-If so, it calls the original function directly; otherwise, it returns a new function that accepts the remaining parameters (rest) and merges the previously passed parameters (args) with the remaining parameters before calling the curried function. In this way, function currying is achieved.
+在这种情况下，curry 函数接受一个函数 fn 作为参数，并返回一个经过 currying 的新函数。
+在调用 curryed 函数时，它会检查传入的参数数量是否大于或等于原函数 fn 的参数数量（arity）。
+如果是，则直接调用原函数；否则，它会返回一个接受剩余参数（rest）的新函数，并将之前传入的参数（args）与剩余参数合并，然后再调用 curryed 函数。这样就实现了函数 currying。
 */
 
 const curry = (fn) => {
@@ -313,7 +314,7 @@ const myurl2 = getURL('http', 'mysite', 'about.html');
 console.log('myurl', myurl);
 console.log('myurl2', myurl2);
 
-// Reduce repeated passing of unchanged parameters
+// 减少重复传递不变的参数
 const superGetURL = curry(getURL)('https', 'mysite');
 const myurl3 = superGetURL('detail.html')
 
@@ -321,7 +322,7 @@ console.log('myurl3', myurl3);
 
 ```
 
-### 13.Base Class
+### 13.继承
 ```js
 var Person = function (name, age) {
   this.name = name;
@@ -342,7 +343,7 @@ Student.prototype.testStuFunc = function () {
   console.log('this is a testStuFunc');
 }
 
-// test
+// 测试
 var zhangsan = new Student("张三", 18, "男", 100);
 console.log(zhangsan.name); // 张三
 console.log(zhangsan.age); // 18
@@ -354,4 +355,4 @@ zhangsan.testStuFunc(); // this is a testStuFunc
 
 ```
 
-### 14.updating
+### 14.更新...

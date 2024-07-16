@@ -112,7 +112,7 @@ P.myApply({name: 'lilei'}, ['13', 'France'])
 P.myBind({name: 'tom'}, '11', 'China')
 ```
 
-### 5.检查是否是类的对象实例
+### 5.checkIfInstanceOf
 ```js
 const checkIfInstanceOf = (obj, classFunction) => {
   if (classFunction === null) return false;

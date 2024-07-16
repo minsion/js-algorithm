@@ -33,6 +33,8 @@ const myurl3 = superGetURL('detail.html')
 
 console.log('myurl3', myurl3);
 
+const arr = new Array();
+
 
 
 
