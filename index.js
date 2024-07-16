@@ -1,41 +1,35 @@
-
-// testing
-/* 
-案例中，curry函数接受一个函数fn作为参数，返回一个新的函数curried。
-curried函数在调用时会检查传入的参数数量是否大于或等于原始函数fn的参数数量（arity），
-如果是，则直接调用原始函数；否则，返回一个新的函数，该函数接受剩余的参数（rest），
-并将之前传入的参数（args）与剩余参数合并后调用curried函数。通过这种方式，实现函数柯里化。
-*/
-
-const curry = (fn) => {
-  const arity = fn.length;
-  return function curried(...args) {
-    if (args.length >= arity) {
-      return fn.apply(this, args);
-    } else {
-      return function (...rest) {
-        return curried.apply(this, args.concat(rest));
-      };
-    }
-  };
+var Person = function (name, age) {
+  this.name = name;
+  this.age = age;
 }
-const getURL = (protocol, domain, path) => {
-  return protocol + "://" + domain + "/" + path;
+Person.prototype.test = "this is a test";
+Person.prototype.testFunc = function () {
+  console.log('this is a testFunc');
 }
-const myurl = getURL('http', 'mysite', 'home.html');
-const myurl2 = getURL('http', 'mysite', 'about.html');
-console.log('myurl', myurl);
-console.log('myurl2', myurl2);
 
-// Reduce repeated passing of unchanged parameters
-const superGetURL = curry(getURL)('https', 'mysite');
-const myurl3 = superGetURL('detail.html')
+// 子类
+var Student = function (name, age, gender, score) {
+  Person.apply(this, [name, age]); // 盗用构造函数
+  this.gender = gender;
+  this.score = score;
+}
+// 1. 改变 Student 构造函数的原型对象
+// Student.prototype = new Person(); 
+// 2.圣杯模式
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
 
-console.log('myurl3', myurl3);
+Student.prototype.testStuFunc = function () {
+  console.log('this is a testStuFunc');
+}
 
-const arr = new Array();
-
-
-
-
-
+// 测试
+var zhangsan = new Student("张三", 18, "男", 100);
+console.log(zhangsan.name); // 张三
+console.log(zhangsan.age); // 18
+console.log(zhangsan.gender); // 男
+console.log(zhangsan.score); // 100
+console.log(zhangsan.test); // this is a test
+zhangsan.testFunc(); // this is a testFunc
+zhangsan.testStuFunc(); // this is a testStuFunc
+console.log(Student.prototype)
