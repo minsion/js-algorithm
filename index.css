@@ -1,0 +1,57 @@
+.container{
+  position: relative;
+  color: #fff;
+  video{
+    margin: -60px 0 0 0;
+  }
+}
+h1{
+  position: absolute;
+  top: 140px;
+  left: 10px;
+  font-size: 24px;
+  mix-blend-mode: difference;
+}
+body {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+nav {
+  height: 60px;
+  background-color: #f8f8f8;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: right;
+}
+
+li {
+  list-style-type: none;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #333;
+  font-size: 15px;
+  display: block;
+  width: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+p {
+  line-height: 26px;
+}
+
+.ignore li a {
+  margin: 0 10px;
+  font-size: 15px;
+  display: block;
+  width: auto;
+  text-decoration: none;
+}
